@@ -31,6 +31,13 @@ export async function session() {
 }
 export async function signIn(email, password) { return check(await client.auth.signInWithPassword({ email, password })); }
 export async function signUp(email, password) { return check(await client.auth.signUp({ email, password })); }
+export async function signInWithKakao() {
+  if (!configured) throw new Error('로그인 서버 연결을 확인해주세요.');
+  return check(await client.auth.signInWithOAuth({
+    provider: 'kakao',
+    options: { redirectTo: window.location.origin }
+  }));
+}
 export async function previewLogin(role = 'junior') {
   if (!previewAllowed) throw new Error('둘러보기 모드가 꺼져 있습니다.');
   actor = role === 'junior' ? PREVIEW_JUNIOR : PREVIEW_MENTOR;

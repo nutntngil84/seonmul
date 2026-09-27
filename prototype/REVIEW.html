@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>선물 v0.2.1 · 화면 폭 비교</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#e9ebe7;color:#283a33;font:15px/1.6 system-ui,"Malgun Gothic",sans-serif}header{background:#fff;border-bottom:1px solid #d2d8ce;padding:16px 24px;display:flex;flex-wrap:wrap;align-items:center;gap:12px}h1{font-size:18px;margin:0 16px 0 0}p{font-size:13px;margin:0;color:#657267}.controls{display:flex;gap:8px;flex-wrap:wrap}button,a{border:1px solid #c9d1c5;background:#fff;color:#3a594a;border-radius:9px;padding:9px 14px;font:inherit;cursor:pointer;text-decoration:none;min-height:42px}button[aria-pressed="true"]{background:#3a594a;color:#fff}button:focus-visible,a:focus-visible{outline:3px solid #789181;outline-offset:3px}.note{padding:12px 24px}#stage{position:relative;margin:12px auto 32px;max-width:calc(100% - 24px);overflow:hidden}iframe{position:absolute;left:0;top:0;border:1px solid #c9d1c5;background:#f7f6f2;transform-origin:top left;border-radius:12px}.direct{margin-left:auto;font-size:14px}
+</style>
+</head>
+<body>
+<header><h1>선물 v0.2.1 화면 폭 비교</h1><div class="controls" aria-label="검토할 화면 너비"><button data-width="390" data-height="844" aria-pressed="true">모바일 390px</button><button data-width="320" data-height="667" aria-pressed="false">모바일 320px</button><button data-width="1024" data-height="800" aria-pressed="false">PC 1024px</button><button data-width="1440" data-height="900" aria-pressed="false">PC 1440px</button></div><a class="direct" href="index.html" target="_blank" rel="noopener">시제품 직접 열기</a></header>
+<div class="note"><p>홈 → 채팅 → 선배 상담 → 성장기록 순서로 확인해보세요. 이 도구는 화면 폭만 바꾸며, 실제 모바일 키보드·터치를 재현하지 않습니다. 직접 열기와 동일 출처에서 브라우저 기록을 사용합니다.</p><p>실제 AI·로그인·서버 저장·외부 알림은 연결되지 않았습니다. 이번 제작 환경에서는 브라우저 접근이 차단되어 실제 화면 검토를 완료하지 못했습니다.</p></div>
+<div id="stage"><iframe title="선물 시제품 검토 화면" src="index.html"></iframe></div>
+<script>
+let width=390,height=844;
+const frame=document.querySelector('iframe'),stage=document.querySelector('#stage');
+function fit(){const scale=Math.min(1,(window.innerWidth-24)/width);stage.style.width=width*scale+'px';stage.style.height=height*scale+'px';frame.style.width=width+'px';frame.style.height=height+'px';frame.style.transform='scale('+scale+')'}
+document.querySelectorAll('[data-width]').forEach(button=>button.addEventListener('click',()=>{width=Number(button.dataset.width);height=Number(button.dataset.height);document.querySelectorAll('[data-width]').forEach(x=>x.setAttribute('aria-pressed',String(x===button)));fit()}));
+window.addEventListener('resize',fit);fit();
+</script>
+</body>
+</html>

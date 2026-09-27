@@ -37,7 +37,7 @@ function shell(body){
 }
 function authView(){
  return `<main id="main" class="welcome-wrap"><header class="welcome-head">${brand()}<span class="demo-pill">선배가 직접 답하는 선물</span></header><div class="welcome-grid"><section class="welcome-copy"><span class="label">후배가 선배가 되는 날까지.</span><h1>그 질문,<br>여기서는 편하게.</h1><p>실무가 막힐 때도, 회사생활이 버거울 때도.<br>선배에게 상황을 들려줘.<br>답변이 오면 알림함에서 이어서 볼 수 있어.</p><div class="quote">“저… 하나만 물어봐도 돼요?”<br>“그럼. 어떤 게 어려워?”<small>정답을 재촉하지 않고, 다음 한 걸음을 함께.</small></div></section><section class="welcome-card">
- ${api.configured?`<h2>${authMode==='signup'?'선물에서 만나자':'다시 만나서 반가워'}</h2><p>같은 계정으로 PC와 앱에서 상담을 이어가.</p><form id="auth-form"><label class="field-label" for="email">이메일</label><input id="email" class="field" type="email" autocomplete="email" required><label class="field-label" for="password">비밀번호</label><input id="password" class="field" type="password" minlength="8" autocomplete="${authMode==='signup'?'new-password':'current-password'}" required><p class="form-error" id="auth-error" role="alert"></p><button class="btn full" type="submit">${authMode==='signup'?'가입하기':'로그인'}</button><button class="btn ghost full" type="button" data-action="auth-mode">${authMode==='signup'?'이미 계정이 있어요':'처음이에요 · 가입하기'}</button></form>`:
+ ${api.configured?`<h2>선물에서 만나자</h2><p>처음 로그인하면 가입이 함께 진행돼. 같은 계정으로 PC와 앱에서 상담을 이어가.</p><button class="btn kakao full" type="button" data-action="kakao-login">카카오로 시작하기</button><p class="tiny muted auth-note">카카오 첫 로그인 시 계정이 자동으로 만들어져.</p><p class="form-error" id="auth-error" role="alert"></p><details class="email-auth"><summary>이메일로 로그인하거나 가입하기</summary><form id="auth-form"><label class="field-label" for="email">이메일</label><input id="email" class="field" type="email" autocomplete="email" required><label class="field-label" for="password">비밀번호</label><input id="password" class="field" type="password" minlength="8" autocomplete="${authMode==='signup'?'new-password':'current-password'}" required><button class="btn full" type="submit">${authMode==='signup'?'가입하기':'로그인'}</button><button class="btn ghost full" type="button" data-action="auth-mode">${authMode==='signup'?'이미 계정이 있어요':'처음이에요 · 가입하기'}</button></form></details>`:
  `<h2>선배 상담을<br>먼저 둘러볼까?</h2><p>기존 선물 화면에 실제 선배 상담 흐름을 반영했어.</p><div class="notice warm">현재는 서버 연결 전이야. 입력한 내용은 이 브라우저에만 저장되고 실제 선배에게 전송되지 않아.</div>${api.previewAllowed?`<button class="btn full" data-preview="junior">후배로 둘러보기 ${icon('arrow')}</button><button class="btn secondary full" data-preview="mentor">선배 답변 화면 둘러보기</button>`:'<p class="form-error">서비스 연결 준비 중입니다. 아직 회원가입과 상담 접수를 받지 않습니다.</p>'}`}
  </section></div><footer class="welcome-foot">실제 선배 상담 중심 · AI 자동 답변 없음 · 결제와 제공 횟수 제한 없음</footer></main>`;
 }
@@ -110,6 +110,12 @@ document.addEventListener('submit',async e=>{
 });
 document.addEventListener('click',async e=>{
  const b=e.target.closest('button');if(!b||busy)return;
+ if(b.dataset.action==='kakao-login'){
+  busy=true;b.disabled=true;
+  try{await api.signInWithKakao();}
+  catch(err){busy=false;b.disabled=false;const target=$('#auth-error');if(target)target.textContent=err.message||'카카오 로그인을 시작하지 못했어. 다시 시도해줘.';}
+  return;
+ }
  if(b.dataset.view){search='';statusFilter='all';favoritesOnly=false;navigate(b.dataset.view);return;}
  if(b.dataset.consult){navigate('chat',b.dataset.consult);return;}
  if(b.dataset.category){capture();category=b.dataset.category;render();$('#question-body').focus();return;}

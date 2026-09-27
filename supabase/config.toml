@@ -1,0 +1,9 @@
+project_id = "seonmul"
+
+[functions.dispatch-notifications]
+# JWT 대신 서버 전용 CRON_SECRET 검증. 공개 호출을 허용하는 설정이 아님.
+verify_jwt = false
+
+[functions.delete-account]
+# 함수 내부 auth.getUser()로 실제 사용자 JWT를 검증한다.
+verify_jwt = false

@@ -1,0 +1,13 @@
+{
+  "base": "seonmul_mvp_v0.2.1.zip",
+  "preserved_original_files": {
+    "QA_NOTES.md": "43f9f4382baba75c53d16a9f363ca91b6218c946a7b299f86f76935609c6a0b8",
+    "CHANGELOG.md": "566b2f664d0ccfb9f7d0d924fc00ee6debf4c0eb4b53f8ac61aba7289fcebecd",
+    "BUILDER_PROMPT.md": "e2b9d729099bd06ccb8b860a4094d69df27df415eb74cd3448e310c920947942",
+    "IMPLEMENTATION_BRIEF.md": "a6c18a9abbc338255f8b53234c3592eedeb3d90ea688135bd61dbc488dbdf28c",
+    "README.md": "b3d7384febae6e22095a112f8f6630bbc9900a00b37ad0696b098f82d21d9abc",
+    "MENTOR_SYSTEM_PROMPT.md": "724aff1c28e7202cd044105e4d9b90e9959ff26ae396dfe4a5384a718ab6325f",
+    "index.html": "5d76f48b0da267c3d727916909358959b09385629ef74fe32819db0db6b92ad1",
+    "REVIEW.html": "9f9652ec70470537bf7e8b5bcc3f4ce4b745aa1ccb2b738f0271a1c622ea3788"
+  }
+}

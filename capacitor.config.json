@@ -1,0 +1,16 @@
+{
+  "appId": "com.example.seonmul",
+  "appName": "선물",
+  "webDir": "dist",
+  "plugins": {
+    "PushNotifications": {
+      "presentationOptions": [
+        "badge",
+        "sound",
+        "alert",
+        "banner",
+        "list"
+      ]
+    }
+  }
+}
